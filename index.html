@@ -18,15 +18,18 @@
     /*position: fixed;*/
     height: 100%;
   }
-  #dial {
+  .dialContainer {
     width: 300px;
     height: 300px;
-    display: block;
-    margin: auto;
     position: absolute;
     left: 50%;
     top: 30%;
     transform: translate(-50%, -50%) rotate(0deg);
+  }
+  #dial {
+    width: 300px;
+    height: 300px;
+    transform: rotate(0deg);
   }
   #dial span {
     position: absolute;
@@ -60,6 +63,7 @@
 <body>
   <button onclick="grantPremission()">enable compass access</button>
 
+  <div class = "dialContainer">
   <div id = "dial">
 
   <span class="label" style="top: 13.5%; left: 50%; width: 4.5px; height: 16px; -webkit-backdrop-filter: invert(1);"  ></span>
@@ -84,6 +88,7 @@
   <span class="label" style="top: 10%;   left: 26%;"  >330</span>
 
   <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
+  </div>
   </div>
 
   <div id = "stats">
@@ -120,7 +125,7 @@
       for (let i = 0; i < labels.length; i++) {
         labels[i].style.transform = "translate(-50%, -50%) rotate(" + labelAngle + "deg";
       }
-      dial.style.transform = "translate(-50%, -50%) rotate(" + heading + "deg)"
+      dial.style.transform = "rotate(" + heading + "deg)"
       document.getElementById("heading-value").innerHTML = Math.round(e.webkitCompassHeading) + "&deg";
       var directionName = "";
       if(acHeading > 337 || acHeading < 22){
