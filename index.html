@@ -108,12 +108,20 @@
 
       <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
     </div>
-    
+
+    <svg id = "level-disp" width="100" height="100" style = "position: absolute; left: 45%; top: 55%; transform: translate(-50%, -50%) scale(1.2);">
+      <circle cx="50" cy="50" r="32"fill="#222" />
+      <line stroke="white" stroke-width="0.3" x1="50" y1="40" x2="50" y2="60" stroke="black" />
+      <line stroke="white" stroke-width="0.3" x1="40" y1="50" x2="60" y2="50" stroke="black" />
+   </svg> 
+
     <svg width="100" height="100" style = "position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.2);">
       <line stroke="white" stroke-width="0.3" x1="50" y1="0" x2="50" y2="100" stroke="black" />
       <line stroke="white" stroke-width="0.3" x1="0" y1="50" x2="100" y2="50" stroke="black" />
    </svg> 
-    
+
+   
+
   </div>
 
   <div id = "stats">
@@ -164,6 +172,10 @@
   }
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
+      var levelDisp = document.getElementById("level-disp");
+      levelDisp.style.left = (e.alpha / 36) + 40;
+      levelDisp.style.top = (e.beta / 36) + 40;
+
       var acHeading = e.webkitCompassHeading;
       var heading = 0;
       var screenAngle = window.orientation;
