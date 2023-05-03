@@ -192,27 +192,24 @@
 
 
   function convertCoordinates(latitude, longitude) {
-    const latDegrees = Math.floor(latitude);
-    const latMinutes = Math.floor((latitude - latDegrees) * 60);
-    const latSeconds = Math.round((latitude - latDegrees - latMinutes / 60) * 3600);
+  const latDegrees = Math.floor(latitude);
+  const latMinutes = Math.floor((latitude - latDegrees) * 60);
+  const latSeconds = Math.round((latitude - latDegrees - latMinutes / 60) * 3600);
 
-    let lonDegrees = Math.floor(longitude);
-    let lonMinutes = Math.floor((longitude - lonDegrees) * 60);
-    let lonSeconds = Math.round((longitude - lonDegrees - lonMinutes / 60) * 3600);
+  let lonDegrees = Math.floor(Math.abs(longitude));
+  let lonMinutes = Math.floor((Math.abs(longitude) - lonDegrees) * 60);
+  let lonSeconds = Math.round((Math.abs(longitude) - lonDegrees - lonMinutes / 60) * 3600);
 
-    let direction = longitude >= 0 ? 'E' : 'W';
-    if (longitude < 0) {
-      direction = 'W';
-      lonDegrees = Math.abs(lonDegrees);
-      lonMinutes = Math.abs(lonMinutes);
-      lonSeconds = Math.abs(lonSeconds);
-    }
-
-    const latString = `${latDegrees}°${latMinutes}'${latSeconds}" ${latitude >= 0 ? 'N' : 'S'}`;
-    const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${direction}`;
-
-    return `${latString} ${lonString}`;
+  let direction = longitude >= 0 ? 'E' : 'W';
+  if (longitude < 0) {
+    direction = 'W';
   }
+
+  const latString = `${latDegrees}°${latMinutes}'${latSeconds}" ${latitude >= 0 ? 'N' : 'S'}`;
+  const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${direction}`;
+
+  return `${latString} ${lonString}`;
+}
 
 
 </script>
