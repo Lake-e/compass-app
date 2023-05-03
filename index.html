@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compass App</title>
+<style>
+</style>
+</head>
+<body>
+  <h1>Compass App</h1>
+</body>
+<script>
+  DeviceOrientationEvent.requestPermission()
+  window.addEventListener('deviceorientation', function(e) {
+      console.log( e.webkitCompassHeading );
+  }, false);
+</script>
+</html>
