@@ -113,21 +113,34 @@
   <div id = "stats">
     <div style = "height: 80px;">
       <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
-      <div id = "heading-value" class = "heading-display" style = "width: 53%; float: left;  text-align: right;">246&deg;</div>
-      <div id = "heading-name" class = "heading-display" style = "width: 42%; float: right; text-align: left;">SW</div>
+      <div id="heading-value" class="heading-display" style="width: 53%; float: left; text-align: right;">246&deg;</div>
+      <div id="heading-name" class="heading-display" style="width: 42%; float: right; text-align: left;">SW</div>
     </div>
-    <div class = "location-display" id = "location-info">
-      29&deg;34'32" N 87&deg;33'23" W<br>
-      Location, Name<br>
-      612 ft Elevation
+    <div class="location-display">
+      <span id="location-info">--&deg;--'--" - --&deg;--'--" -</span><br>
+      <span id="location-name">----</span><br>
+      <span id = "location-elev">-- ft Elevation</span>
     </div>
   </div>
 
 </body>
 <script>
+  var lastNamedLat = 0;
+  var lastNamedLong = 0;
+  
   function showPosition(position) {
-    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>" + locationName(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3)) + "<br>" + Math.round(position.coords.altitude); + " m Elevation";
+    var nameLat = position.coords.latitude.toFixed(3);
+    var nameLong = position.coords.longitude.toFixed(3);
+    if(lastNamedLat != nameLat || lastNamedLong != nameLong) {
+      locationName();
+      lastNamedLat = nameLat;
+      lastNamedLong = nameLong;
+    }
+    document.getElementById("location-info").innerHTML = convertCoordinates(position.coords.latitude, position.coords.longitude);
+    doucment.getElementById("location-elev").innerHTML = Math.round(position.coords.altitude * 3.280839895) + " ft Elevation";
   }
+  
+  
   function updatePosition() {
     navigator.geolocation.getCurrentPosition(showPosition);
   }
@@ -214,17 +227,16 @@
 const url = 'https://geoservices.tamu.edu/Api/ReverseGeocoding/V5/?apikey=cd1a527a9de343bd9ccddcab375e57db&format=json&notStore=true&version=5.0.0';
 
 function locationName(lat, long) {
-  var locName = "----";
   fetch(url + "&latitude=" + lat + "&longitude=" + long)
     .then(response => response.json())
     .then(data => {
       const city = data.data.results[0].city;
       const state = data.data.results[0].state;
-      locName = city + ", " + state;
+      var locName = city + ", " + state;
       console.log(locName);
+      document.getElementById("location-name").innerHTML = locName;
     })
     .catch(error => console.error(error));
-  return locName;
 }
 
 
