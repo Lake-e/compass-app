@@ -126,7 +126,7 @@
 </body>
 <script>
   function showPosition(position) {
-    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>Location Name<br>121 ft Elevation";
+    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>Location Name<br>coords.altitude m Elevation";
   }
   function updatePosition() {
     navigator.geolocation.getCurrentPosition(showPosition);
