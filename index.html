@@ -132,12 +132,12 @@
     var nameLat = position.coords.latitude.toFixed(3);
     var nameLong = position.coords.longitude.toFixed(3);
     if(lastNamedLat != nameLat || lastNamedLong != nameLong) {
-      locationName();
+      locationName(nameLat, nameLong);
       lastNamedLat = nameLat;
       lastNamedLong = nameLong;
     }
     document.getElementById("location-info").innerHTML = convertCoordinates(position.coords.latitude, position.coords.longitude);
-    doucment.getElementById("location-elev").innerHTML = Math.round(position.coords.altitude * 3.280839895) + " ft Elevation";
+    document.getElementById("location-elev").innerHTML = Math.round(position.coords.altitude * 3.280839895) + " ft Elevation";
   }
   
   
