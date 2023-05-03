@@ -115,7 +115,7 @@
       dial.style.transform = "translate(-50%, -50%) rotate(" + heading + "deg)"
       document.getElementById("heading-value").innerHTML = Math.round(e.webkitCompassHeading) + "&deg";
       var directionName = "";
-      if(acHeading > 337 && acHeading < 22){
+      if(acHeading > 337 || acHeading < 22){
         directionName = "N"
       } else if(acHeading < 67){
         directionName = "NE"
