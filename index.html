@@ -126,7 +126,7 @@
 </body>
 <script>
   function showPosition(position) {
-    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>" + locationName(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2)) + "<br>" + position.coords.altitude.toFixed(0); + " m Elevation";
+    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>" + locationName(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2)) + "<br>" + Math.round(position.coords.altitude); + " m Elevation";
   }
   function updatePosition() {
     navigator.geolocation.getCurrentPosition(showPosition);
