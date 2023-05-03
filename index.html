@@ -69,13 +69,13 @@
       var heading = 0;
       var screenAngle = window.orientation;
       if(screenAngle == 0 || screenAngle == 360) {
-        heading = (180 - e.webkitCompassHeading);
-      } else if(screenAngle == 90) {
-        heading = (90 - e.webkitCompassHeading);
-      } else if(screenAngle == 180) {
         heading = (360 - e.webkitCompassHeading);
-      } else if(screenAngle == 270 || screenAngle == -90) {
+      } else if(screenAngle == 90) {
         heading = (270 - e.webkitCompassHeading);
+      } else if(screenAngle == 180) {
+        heading = (180 - e.webkitCompassHeading);
+      } else if(screenAngle == 270 || screenAngle == -90) {
+        heading = (90 - e.webkitCompassHeading);
       } else {
         console.error("The browser dosnt support window.orientation");
       }
