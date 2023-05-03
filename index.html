@@ -31,8 +31,21 @@
   }
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
+      var heading = 0;
+      var screenAngle = window.orientation;
+      if(screenAngle == 0) {
+        heading = (180 - e.webkitCompassHeading);
+      } else if(screenAngle == 90) {
+        heading = (90 - e.webkitCompassHeading);
+      } else if(screenAngle == 180) {
+        heading = (360 - e.webkitCompassHeading);
+      } else if(screenAngle == 270) {
+        heading = (270 - e.webkitCompassHeading);
+      } else {
+        console.error("The browser dosnt support window.orientation");
+      }
       console.log( e.webkitCompassHeading );
-      dial.style.transform = "translate(-50%, -50%) rotate(" + (360 - e.webkitCompassHeading) + "deg)"
+      dial.style.transform = "translate(-50%, -50%) rotate(" + heading + "deg)"
   }, false);
 </script>
 </html>
