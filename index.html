@@ -125,22 +125,16 @@
 
 </body>
 <script>
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  }
-
   function showPosition(position) {
-    document.getElementById("location-info").innerHTML =  position.coords.latitude + 
-    " " + position.coords.longitude + "<br>Location Name<br>121 ft Elevation";
+    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>Location Name<br>121 ft Elevation";
   }
 
   function grantPremission() {
-    
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      setInterval(function () {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }, 60000);
     }
-    
     DeviceOrientationEvent.requestPermission();
     const iii = document.querySelectorAll(".accessblur");
     for (let i = 0; i < iii.length; i++) {
@@ -193,5 +187,22 @@
       
       
   }, false);
+
+
+  function convertCoordinates(latitude, longitude) {
+    const latDegrees = Math.floor(latitude);
+    const latMinutes = Math.floor((latitude - latDegrees) * 60);
+    const latSeconds = Math.round((latitude - latDegrees - latMinutes / 60) * 3600);
+
+    const lonDegrees = Math.floor(longitude);
+    const lonMinutes = Math.floor((longitude - lonDegrees) * 60);
+    const lonSeconds = Math.round((longitude - lonDegrees - lonMinutes / 60) * 3600);
+
+    const latString = `${latDegrees}°${latMinutes}'${latSeconds}" ${latitude >= 0 ? 'N' : 'S'}`;
+    const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${longitude >= 0 ? 'E' : 'W'}`;
+
+    return `${latString} ${lonString}`;
+  }
+
 </script>
 </html>
