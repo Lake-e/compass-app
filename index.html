@@ -7,9 +7,12 @@
 </head>
 <body>
   <h1>Compass App</h1>
+  <button onclick="grantPremission()">enable compass access</button>
 </body>
 <script>
-  DeviceOrientationEvent.requestPermission()
+  function grantPremission() {
+    DeviceOrientationEvent.requestPermission()
+  }
   window.addEventListener('deviceorientation', function(e) {
       console.log( e.webkitCompassHeading );
   }, false);
