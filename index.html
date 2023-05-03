@@ -3,18 +3,36 @@
 <head>
 <title>Compass App</title>
 <style>
+  body {
+    background: black;
+    color: white;
+    font-family: -apple-system;
+    font-weight: 200;
+  }
+  #dial {
+    width: 300px;
+    display: block;
+    margin: auto;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
 </style>
 </head>
 <body>
-  <h1>Compass App</h1>
   <button onclick="grantPremission()">enable compass access</button>
+
+  <img id = "dial" src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
+
 </body>
 <script>
   function grantPremission() {
     DeviceOrientationEvent.requestPermission()
   }
+  var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
       console.log( e.webkitCompassHeading );
+      dial.style.transform = "translate(-50%, -50%) rotate(" + e.webkitCompassHeading + "deg)"
   }, false);
 </script>
 </html>
