@@ -32,7 +32,7 @@
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
       console.log( e.webkitCompassHeading );
-      dial.style.transform = "translate(-50%, -50%) rotate(" + e.webkitCompassHeading + "deg)"
+      dial.style.transform = "translate(-50%, -50%) rotate(" + (360 - e.webkitCompassHeading) + "deg)"
   }, false);
 </script>
 </html>
