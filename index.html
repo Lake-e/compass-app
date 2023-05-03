@@ -15,8 +15,9 @@
     display: block;
     margin: auto;
     position: absolute;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%) rotate(180deg);
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   #dial span {
     position: absolute;
@@ -31,6 +32,18 @@
     width: 90%;
     margin-left: 5%; margin-top: 5%;
     transform: rotate(180deg);
+  }
+
+  #stats {
+    position: absolute;
+    left: 50%;
+    top: 72%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    width: 300px;
+  }
+  .heading-display {
+    font-size: 4em;
+    display: inline-block;
   }
 </style>
 </head>
@@ -59,6 +72,13 @@
   <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
   </div>
 
+  <div id = "stats">
+    <div style = "height: 80px;">
+    <div id = "heading-value" class = "heading-display" style = "width: 55%; float: left;  text-align: right;">180&deg;</div>
+    <div id = "heading-name" class = "heading-display" style = "width: 45%; float: right; text-align: left;">NW</div>
+    </div>
+  </div>
+
 </body>
 <script>
   function grantPremission() {
@@ -66,6 +86,7 @@
   }
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
+      var acHeading = e.webkitCompassHeading;
       var heading = 0;
       var screenAngle = window.orientation;
       if(screenAngle == 0 || screenAngle == 360) {
@@ -86,6 +107,28 @@
         labels[i].style.transform = "translate(-50%, -50%) rotate(" + labelAngle + "deg";
       }
       dial.style.transform = "translate(-50%, -50%) rotate(" + heading + "deg)"
+      document.getElementById("heading-value").innerHTML = Math.round(e.webkitCompassHeading) + "&deg";
+      var directionName = "";
+      if(acHeading > 337 && acHeading < 22){
+        directionName = "N"
+      } else if(acHeading < 67){
+        directionName = "NE"
+      } else if(acHeading < 112){
+        directionName = "E"
+      } else if(acHeading < 157){
+        directionName = "SE"
+      } else if(acHeading < 202){
+        directionName = "S"
+      } else if(acHeading < 247){
+        directionName = "SW"
+      } else if(acHeading < 292){
+        directionName = "W"
+      } else {
+        directionName = "NW"
+      } 
+      document.getElementById("heading-name").innerHTML = directionName;
+      
+      
   }, false);
 </script>
 </html>
