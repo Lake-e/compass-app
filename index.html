@@ -128,12 +128,14 @@
   function showPosition(position) {
     document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>Location Name<br>121 ft Elevation";
   }
+  function updatePosition() {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
 
   function grantPremission() {
     if (navigator.geolocation) {
-      setInterval(function () {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      }, 60000);
+      updatePosition();
+      setInterval(updatePosition(), 60000);
     }
     DeviceOrientationEvent.requestPermission();
     const iii = document.querySelectorAll(".accessblur");
@@ -194,15 +196,24 @@
     const latMinutes = Math.floor((latitude - latDegrees) * 60);
     const latSeconds = Math.round((latitude - latDegrees - latMinutes / 60) * 3600);
 
-    const lonDegrees = Math.floor(longitude);
-    const lonMinutes = Math.floor((longitude - lonDegrees) * 60);
-    const lonSeconds = Math.round((longitude - lonDegrees - lonMinutes / 60) * 3600);
+    let lonDegrees = Math.floor(longitude);
+    let lonMinutes = Math.floor((longitude - lonDegrees) * 60);
+    let lonSeconds = Math.round((longitude - lonDegrees - lonMinutes / 60) * 3600);
+
+    let direction = longitude >= 0 ? 'E' : 'W';
+    if (longitude < 0) {
+      direction = 'W';
+      lonDegrees = Math.abs(lonDegrees);
+      lonMinutes = Math.abs(lonMinutes);
+      lonSeconds = Math.abs(lonSeconds);
+    }
 
     const latString = `${latDegrees}°${latMinutes}'${latSeconds}" ${latitude >= 0 ? 'N' : 'S'}`;
-    const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${longitude >= 0 ? 'E' : 'W'}`;
+    const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${direction}`;
 
     return `${latString} ${lonString}`;
   }
+
 
 </script>
 </html>
