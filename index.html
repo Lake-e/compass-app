@@ -126,7 +126,7 @@
 </body>
 <script>
   function showPosition(position) {
-    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>" + locationName(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2)) + "<br>" + Math.round(position.coords.altitude); + " m Elevation";
+    document.getElementById("location-info").innerHTML =  convertCoordinates(position.coords.latitude, position.coords.longitude) + "<br>" + locationName(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3)) + "<br>" + Math.round(position.coords.altitude); + " m Elevation";
   }
   function updatePosition() {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -214,16 +214,17 @@
 const url = 'https://geoservices.tamu.edu/Api/ReverseGeocoding/V5/?apikey=cd1a527a9de343bd9ccddcab375e57db&format=json&notStore=true&version=5.0.0';
 
 function locationName(lat, long) {
+  var locName = "----";
   fetch(url + "&latitude=" + lat + "&longitude=" + long)
     .then(response => response.json())
     .then(data => {
       const city = data.data.results[0].city;
       const state = data.data.results[0].state;
-      var locName = city + ", " + state;
+      locName = city + ", " + state;
       console.log(locName);
-      return locName;
     })
     .catch(error => console.error(error));
+  return locName;
 }
 
 
