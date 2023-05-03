@@ -30,10 +30,11 @@
     width: 300px;
     height: 300px;
     transform: rotate(0deg);
+    position: relative;
   }
   #dial span {
     position: absolute;
-    z-index: 10;
+    z-index: 100;
     font-size: 1.0em;
     transform: translate(-50%, -50%);
   }
@@ -44,6 +45,8 @@
     width: 90%;
     margin-left: 5%; margin-top: 5%;
     transform: rotate(180deg);
+    position: absolute;
+    z-index: 0;
   }
 
   #stats {
@@ -58,50 +61,63 @@
     display: inline-block;
     font-weight: 150;
   }
+  .accessblur {
+    width: 160%; height: 160%;
+    position: absolute;
+    left: -30%; top: -30%;
+    -webkit-backdrop-filter: blur(4px) brightness(2);
+    z-index: 300;
+    text-align: center;
+    display: grid;
+    place-content: center;
+    transition: opacity 1s ease-in-out;
+  }
 </style>
 </head>
 <body>
-  <button onclick="grantPremission()">enable compass access</button>
-
   <div class = "dialContainer">
-  <div id = "dial">
+    <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
+    <span style="position: absolute; transform: translateX(-50%); top: 32px; left: 50%; width: 5px; height: 18px; -webkit-backdrop-filter: invert(1); z-index: 1;"  ></span>
+    <span style="position: absolute; transform: translateX(-50%); top: -16px; left: 50%; width: 5px; height: 48px; background: white; z-index: 1;"  ></span>
+    <div id = "dial">
+      <span class="label cardinal" style="left: 50%; top: 25%;">N</span>
+      <span class="label cardinal" style="left: 50%; top: 75%;">S</span>
+      <span class="label cardinal" style="left: 25%; top: 50%;">W</span>
+      <span class="label cardinal" style="left: 75%; top: 50%;">E</span>
 
-  <span class="label" style="top: 13.5%; left: 50%; width: 4.5px; height: 16px; -webkit-backdrop-filter: invert(1);"  ></span>
-  <span class="label" style="top: 4%; left: 50%; width: 4.5px; height: 41.4px; z-index: 1; background: whitesmoke;"  ></span>
-  
-  <span class="label cardinal" style="left: 50%; top: 25%;">N</span>
-  <span class="label cardinal" style="left: 50%; top: 75%;">S</span>
-  <span class="label cardinal" style="left: 25%; top: 50%;">W</span>
-  <span class="label cardinal" style="left: 75%; top: 50%;">E</span>
+      <span class="label" style="top: 0;     left: 50%;"  >0</span>
+      <span class="label" style="top: 50%;   left: 100%;" >90</span>
+      <span class="label" style="top: 100%;  left: 50%;"  >180</span>
+      <span class="label" style="top: 50%;   left: 0%;"   >270</span>
+      <span class="label" style="top: 10%;   left: 74%;"  >35</span>
+      <span class="label" style="top: 24.5%; left: 89.5%;">60</span>
+      <span class="label" style="top: 75.5%; left: 89.5%;">120</span>
+      <span class="label" style="top: 90%;   left: 74%;"  >150</span>
+      <span class="label" style="top: 90%;   left: 26%;"  >210</span>
+      <span class="label" style="top: 75.5%; left: 10.5%;">240</span>
+      <span class="label" style="top: 24.5%; left: 10.5%;">300</span>
+      <span class="label" style="top: 10%;   left: 26%;"  >330</span>
 
-  <span class="label" style="top: 0;     left: 50%;"  >0</span>
-  <span class="label" style="top: 50%;   left: 100%;" >90</span>
-  <span class="label" style="top: 100%;  left: 50%;"  >180</span>
-  <span class="label" style="top: 50%;   left: 0%;"   >270</span>
-  <span class="label" style="top: 10%;   left: 74%;"  >35</span>
-  <span class="label" style="top: 24.5%; left: 89.5%;">60</span>
-  <span class="label" style="top: 75.5%; left: 89.5%;">120</span>
-  <span class="label" style="top: 90%;   left: 74%;"  >150</span>
-  <span class="label" style="top: 90%;   left: 26%;"  >210</span>
-  <span class="label" style="top: 75.5%; left: 10.5%;">240</span>
-  <span class="label" style="top: 24.5%; left: 10.5%;">300</span>
-  <span class="label" style="top: 10%;   left: 26%;"  >330</span>
-
-  <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
-  </div>
+      <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
+    </div>
   </div>
 
   <div id = "stats">
     <div style = "height: 80px;">
-    <div id = "heading-value" class = "heading-display" style = "width: 50%; float: left;  text-align: right;">180&deg;</div>
-    <div id = "heading-name" class = "heading-display" style = "width: 45%; float: right; text-align: left;">NW</div>
+    <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
+    <div id = "heading-value" class = "heading-display" style = "width: 50%; float: left;  text-align: right;">246&deg;</div>
+    <div id = "heading-name" class = "heading-display" style = "width: 45%; float: right; text-align: left;">SW</div>
     </div>
   </div>
 
 </body>
 <script>
   function grantPremission() {
-    DeviceOrientationEvent.requestPermission()
+    DeviceOrientationEvent.requestPermission();
+    const iii = document.querySelectorAll(".accessblur");
+    for (let i = 0; i < iii.length; i++) {
+      iii[i].style.opacity = "0";
+    }
   }
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
