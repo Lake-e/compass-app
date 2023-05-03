@@ -11,18 +11,53 @@
   }
   #dial {
     width: 300px;
+    height: 300px;
     display: block;
     margin: auto;
     position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%) rotate(180deg);
   }
+  #dial span {
+    position: absolute;
+    z-index: 10;
+    font-size: 1.0em;
+    transform: translate(-50%, -50%);
+  }
+  #dial span.cardinal {
+    font-size: 1.7em;
+  }
+  #dial img {
+    width: 90%;
+    margin-left: 5%; margin-top: 5%;
+    transform: rotate(180deg);
+  }
 </style>
 </head>
 <body>
   <button onclick="grantPremission()">enable compass access</button>
 
-  <img id = "dial" src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
+  <div id = "dial">
+  <span class="label cardinal" style="left: 50%; top: 25%;">N</span>
+  <span class="label cardinal" style="left: 50%; top: 75%;">S</span>
+  <span class="label cardinal" style="left: 25%; top: 50%;">W</span>
+  <span class="label cardinal" style="left: 75%; top: 50%;">E</span>
+
+  <span class="label" style="top: 0;     left: 50%;"  >0</span>
+  <span class="label" style="top: 50%;   left: 100%;" >90</span>
+  <span class="label" style="top: 100%;  left: 50%;"  >180</span>
+  <span class="label" style="top: 50%;   left: 0%;"   >270</span>
+  <span class="label" style="top: 10%;   left: 74%;"  >35</span>
+  <span class="label" style="top: 24.5%; left: 89.5%;">60</span>
+  <span class="label" style="top: 75.5%; left: 89.5%;">120</span>
+  <span class="label" style="top: 90%;   left: 74%;"  >150</span>
+  <span class="label" style="top: 90%;   left: 26%;"  >210</span>
+  <span class="label" style="top: 75.5%; left: 10.5%;">240</span>
+  <span class="label" style="top: 24.5%; left: 10.5%;">300</span>
+  <span class="label" style="top: 10%;   left: 26%;"  >330</span>
+
+  <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
+  </div>
 
 </body>
 <script>
@@ -44,7 +79,12 @@
       } else {
         console.error("The browser dosnt support window.orientation");
       }
-      console.log( e.webkitCompassHeading );
+      var labelAngle = 360-heading;
+      
+      const labels = document.querySelectorAll(".label");
+      for (let i = 0; i < labels.length; i++) {
+        labels[i].style.transform = "translate(-50%, -50%) rotate(" + labelAngle + "deg";
+      }
       dial.style.transform = "translate(-50%, -50%) rotate(" + heading + "deg)"
   }, false);
 </script>
