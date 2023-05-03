@@ -217,13 +217,13 @@
   if (longitude < 0) {
     direction = 'W';
   }
-
+  
   const latString = `${latDegrees}°${latMinutes}'${latSeconds}" ${latitude >= 0 ? 'N' : 'S'}`;
   const lonString = `${lonDegrees}°${lonMinutes}'${lonSeconds}" ${direction}`;
 
   return `${latString} ${lonString}`;
 }
-  
+
 const url = 'https://geoservices.tamu.edu/Api/ReverseGeocoding/V5/?apikey=cd1a527a9de343bd9ccddcab375e57db&format=json&notStore=true&version=5.0.0';
 
 function locationName(lat, long) {
@@ -232,11 +232,18 @@ function locationName(lat, long) {
     .then(data => {
       const city = data.data.results[0].city;
       const state = data.data.results[0].state;
-      var locName = city + ", " + state;
+      var locName = "";
+      if(city != "") {
+        locName += city + ", ";
+      }
+      locName +=  state;
       console.log(locName);
       document.getElementById("location-name").innerHTML = locName;
     })
-    .catch(error => console.error(error));
+    .catch((error) => {
+      document.getElementById("location-name").innerHTML = "";
+      console.log(error);
+    });
 }
 
 
