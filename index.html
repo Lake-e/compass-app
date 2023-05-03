@@ -29,14 +29,15 @@
   #dial {
     width: 300px;
     height: 300px;
-    transform: rotate(0deg);
+    transform: rotate(-246deg);
     position: relative;
   }
   #dial span {
     position: absolute;
     z-index: 100;
     font-size: 1.0em;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(246deg);
+    font-weight: 400;
   }
   #dial span.cardinal {
     font-size: 1.7em;
@@ -59,7 +60,14 @@
   .heading-display {
     font-size: 4.5em;
     display: inline-block;
-    font-weight: 150;
+    font-weight: 200;
+  }
+  .location-display {
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.5em;
+    margin-top: 2em;
+    text-align: center;
   }
   .accessblur {
     width: 160%; height: 160%;
@@ -104,14 +112,29 @@
 
   <div id = "stats">
     <div style = "height: 80px;">
-    <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
-    <div id = "heading-value" class = "heading-display" style = "width: 50%; float: left;  text-align: right;">246&deg;</div>
-    <div id = "heading-name" class = "heading-display" style = "width: 45%; float: right; text-align: left;">SW</div>
+      <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
+      <div id = "heading-value" class = "heading-display" style = "width: 53%; float: left;  text-align: right;">246&deg;</div>
+      <div id = "heading-name" class = "heading-display" style = "width: 42%; float: right; text-align: left;">SW</div>
+    </div>
+    <div class = "location-display" id = "location-info">
+      29&deg;34'32" N 87&deg;33'23" W<br>
+      Location, Name<br>
+      612 ft Elevation
     </div>
   </div>
 
 </body>
 <script>
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+
+  function showPosition(position) {
+    document.getElementById("location-info").innerHTML =  position.coords.latitude + 
+    " " + position.coords.longitude + "<br>Location Name<br>121 ft Elevation";
+  }
+
   function grantPremission() {
     DeviceOrientationEvent.requestPermission();
     const iii = document.querySelectorAll(".accessblur");
