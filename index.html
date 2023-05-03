@@ -136,6 +136,11 @@
   }
 
   function grantPremission() {
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    
     DeviceOrientationEvent.requestPermission();
     const iii = document.querySelectorAll(".accessblur");
     for (let i = 0; i < iii.length; i++) {
