@@ -252,9 +252,9 @@
         labels[i].style.transform = "translate(-50%, -50%) rotate(" + labelAngle + "deg";
       }
       dial.style.transform = "rotate(" + heading + "deg)"
-      document.getElementById("heading-value").innerHTML = Math.round(e.webkitCompassHeading) + "&deg";
-      var directionName = "";
       var acHeading = 360 - heading;
+      document.getElementById("heading-value").innerHTML = Math.round(acHeading) + "&deg";
+      var directionName = "";
       if(acHeading > 337 || acHeading < 22){
         directionName = "N"
       } else if(acHeading < 67){
