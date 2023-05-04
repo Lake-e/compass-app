@@ -322,6 +322,23 @@ function locationName(lat, long) {
       console.log(error);
     });
 }
+  
+  
+  
+window.addEventListener("load", function() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/compass-app/serviceworker.js').then(
+        () => {
+          console.error('Service Worker registered!')
+        },
+        err => {
+          console.error('SW registration failed!', err)
+        }
+      )
+   } else {
+     console.log("Service Workers Not Supported!");
+   }
+});
 
 
 </script>
