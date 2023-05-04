@@ -173,23 +173,34 @@
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
       var levelDisp = document.getElementById("level-disp");
-      levelDisp.style.top = (e.gamma / -9 + 50) + "%";
-      levelDisp.style.left = "" + (e.beta / 9 + 50) + "%";
+      var levelX = 0; var levelY = 0;
+      var levelG = (e.gamma / 9);
+      var levelB = (e.beta / 9);
 
       var acHeading = e.webkitCompassHeading;
       var heading = 0;
       var screenAngle = window.orientation;
-      if(screenAngle == 0 || screenAngle == 360) {
+      if(screenAngle == 0 || screenAngle == 360) { // rightside up
         heading = (360 - e.webkitCompassHeading);
-      } else if(screenAngle == 90) {
+        levelY = levelB;
+        levelX = levelG;
+      } else if(screenAngle == 90) { //landscape left
         heading = (270 - e.webkitCompassHeading);
-      } else if(screenAngle == 180) {
+        levelY = levelG * -1;
+        levelX = levelB;
+      } else if(screenAngle == 180) { //upside down
         heading = (180 - e.webkitCompassHeading);
-      } else if(screenAngle == 270 || screenAngle == -90) {
+        levelY = levelB * -1;
+        levelX = levelG * -1;
+      } else if(screenAngle == 270 || screenAngle == -90) { //landscape right
         heading = (90 - e.webkitCompassHeading);
+        levelY = levelG;
+        levelX = levelB * -1;
       } else {
         console.error("The browser dosnt support window.orientation");
       }
+      levelDisp.style.top = (levelY + 50) + "%";
+      levelDisp.style.left = (levelX + 50) + "%";
       var labelAngle = 360-heading;
       
       const labels = document.querySelectorAll(".label");
