@@ -174,8 +174,8 @@
   window.addEventListener('deviceorientation', function(e) {
       var levelDisp = document.getElementById("level-disp");
       var levelX = 0; var levelY = 0;
-      var levelG = Math.abs(10 - (e.gamma / 9)) + 10;
-      var levelB = Math.abs(10 - (e.beta / 9)) + 10;
+      var levelG = Math.min(Math.max((e.gamma / 9), -5), 5);
+      var levelB = Math.min(Math.max((e.beta / 9), -5), 5);
 
       var acHeading = e.webkitCompassHeading;
       var heading = 0;
