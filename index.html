@@ -221,8 +221,7 @@
       var levelX = 0; var levelY = 0;
       var levelG = Math.min(Math.max((e.gamma / 9), -5), 5);
       var levelB = Math.min(Math.max((e.beta / 9), -5), 5);
-
-      var acHeading = e.webkitCompassHeading;
+    
       var heading = 0;
       var screenAngle = window.orientation;
       if(screenAngle == 0 || screenAngle == 360) { // rightside up
@@ -255,6 +254,7 @@
       dial.style.transform = "rotate(" + heading + "deg)"
       document.getElementById("heading-value").innerHTML = Math.round(e.webkitCompassHeading) + "&deg";
       var directionName = "";
+      var acHeading = 360 - heading;
       if(acHeading > 337 || acHeading < 22){
         directionName = "N"
       } else if(acHeading < 67){
