@@ -49,7 +49,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
+/*self.addEventListener('fetch', (event) => {
   // We only want to call event.respondWith() if this is a navigation request
   // for an HTML page.
   if (event.request.mode === 'navigate') {
@@ -82,4 +82,31 @@ self.addEventListener('fetch', (event) => {
   // chance to call event.respondWith(). If no fetch handlers call
   // event.respondWith(), the request will be handled by the browser as if there
   // were no service worker involvement.
+});*/
+
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith((async() => {
+
+    const cache = await caches.open(cacheName);
+
+    try {
+        const cachedResponse = await cache.match(event.request);
+        if(cachedResponse) {
+            console.log('cachedResponse: ', event.request.url);
+            return cachedResponse;
+        }
+
+        const fetchResponse = await fetch(event.request, {mode:'no-cors'});
+        if(fetchResponse) {
+            console.log('fetchResponse: ', event.request.url);
+            await cache.put(event.request, fetchResponse.clone());
+            return fetchResponse;
+        }
+    }   catch (error) {
+        console.log('Fetch failed: ', error);
+        const cachedResponse = await cache.match('/en/offline.html');
+        return cachedResponse;
+    }
+  })());
 });
