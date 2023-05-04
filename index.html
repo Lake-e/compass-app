@@ -29,14 +29,14 @@
   #dial {
     width: 300px;
     height: 300px;
-    transform: rotate(-246deg);
+    transform: /*rotate(-246deg)*/;
     position: relative;
   }
   #dial span {
     position: absolute;
     z-index: 100;
     font-size: 1.0em;
-    transform: translate(-50%, -50%) rotate(246deg);
+    transform: translate(-50%, -50%)/* rotate(246deg)*/;
     font-weight: 400;
   }
   #dial span.cardinal {
@@ -93,18 +93,23 @@
       <span class="label cardinal" style="left: 25%; top: 50%;">W</span>
       <span class="label cardinal" style="left: 75%; top: 50%;">E</span>
 
-      <span class="label" style="top: 0;     left: 50%;"  >0</span>
-      <span class="label" style="top: 50%;   left: 100%;" >90</span>
-      <span class="label" style="top: 100%;  left: 50%;"  >180</span>
-      <span class="label" style="top: 50%;   left: 0%;"   >270</span>
-      <span class="label" style="top: 10%;   left: 74%;"  >35</span>
-      <span class="label" style="top: 24.5%; left: 89.5%;">60</span>
-      <span class="label" style="top: 75.5%; left: 89.5%;">120</span>
-      <span class="label" style="top: 90%;   left: 74%;"  >150</span>
-      <span class="label" style="top: 90%;   left: 26%;"  >210</span>
-      <span class="label" style="top: 75.5%; left: 10.5%;">240</span>
-      <span class="label" style="top: 24.5%; left: 10.5%;">300</span>
-      <span class="label" style="top: 10%;   left: 26%;"  >330</span>
+      <span class="label" style="top: 2%;     left: 50%;"  >0</span>
+      <!--<span class="label" style="top: 10%;   left: 74%;"  >30</span>
+      <span class="label" style="top: 24.5%; left: 89.5%;">60</span>-->
+      <span class="label" style="top: 8.5%;   left: 74%;"  >30</span>
+      <span class="label" style="top: 24.5%; left: 91.5%;">60</span>
+
+      <span class="label" style="top: 50%;   left: 98%;" >90</span>
+      <span class="label" style="top: 75.5%; left: 91.5%;">120</span>
+      <span class="label" style="top: 92%;   left: 74%;"  >150</span>
+
+      <span class="label" style="top: 98%;  left: 50%;"  >180</span>
+      <span class="label" style="top: 92%;   left: 26%;"  >210</span>
+      <span class="label" style="top: 75.5%; left: 8.5%;">240</span>
+
+      <span class="label" style="top: 50%;   left: 2%;"   >270</span>
+      <span class="label" style="top: 24.5%; left: 8.5%;">300</span>
+      <span class="label" style="top: 8.5%;   left: 26%;"  >330</span>
 
       <img src = "https://lake-e.github.io/compass-app/compass-dial.jpeg">
     </div>
@@ -131,8 +136,8 @@
       <div id="heading-name" class="heading-display" style="width: 42%; float: right; text-align: left;">SW</div>
     </div>
     <div class="location-display">
-      <span id="location-info">--&deg;--'--" - --&deg;--'--" -</span><br>
-      <span id="location-name">----</span><br>
+      <span id="location-info">- &deg; - ' - " - &nbsp; &nbsp; - &deg; - ' - " -</span><br>
+      <span id="location-name"></span><br>
       <span id = "location-elev">-- ft Elevation</span>
     </div>
   </div>
@@ -143,8 +148,8 @@
   var lastNamedLong = 0;
   
   function showPosition(position) {
-    var nameLat = position.coords.latitude.toFixed(3);
-    var nameLong = position.coords.longitude.toFixed(3);
+    var nameLat = position.coords.latitude.toFixed(2);
+    var nameLong = position.coords.longitude.toFixed(2);
     if(lastNamedLat != nameLat || lastNamedLong != nameLong) {
       locationName(nameLat, nameLong);
       lastNamedLat = nameLat;
