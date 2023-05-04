@@ -173,8 +173,8 @@
   var dial = document.getElementById("dial");
   window.addEventListener('deviceorientation', function(e) {
       var levelDisp = document.getElementById("level-disp");
-      levelDisp.style.left = (e.alpha / 36) + 40;
-      levelDisp.style.top = (e.beta / 36) + 40;
+      levelDisp.style.top = (e.gamma / -9 + 50) + "%";
+      levelDisp.style.left = "" + (e.beta / 9 + 50) + "%";
 
       var acHeading = e.webkitCompassHeading;
       var heading = 0;
