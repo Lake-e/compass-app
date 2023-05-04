@@ -53,8 +53,8 @@
   #stats {
     position: absolute;
     left: 50%;
-    top: 72%;
-    transform: translate(-50%, -50%) rotate(0deg);
+    top: 79%;
+    transform: translate(-50%, -50%);
     width: 300px;
   }
   .heading-display {
@@ -79,6 +79,46 @@
     display: grid;
     place-content: center;
     transition: opacity 1s ease-in-out;
+  }
+
+  @media (max-width: 345px), (max-height: 345px) {
+    .dialContainer {
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+  }
+  @media (min-height: 700px) and (min-width: 415px) {
+    .dialContainer {
+      transform: translate(-50%, -50%) scale(1.15);
+      top: 35%;
+    }
+  }
+  @media (max-height: 528px) and (min-width: 567px), (max-height: 730px) and (min-width: 670px) {
+    .dialContainer {
+      left: 28%; top: 50%;
+    }
+    #stats{
+      left: 72%;
+      top: 50%;
+    }
+    @media (min-width: 850px) and (min-height: 490px) {
+      .dialContainer {
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+    }
+    @media (max-width: 728px) {
+      .dialContainer {
+        left: 26%; top: 50%;
+      }
+      #stats{
+        left: 75%;
+        top: 50%;
+      }
+    }
+    @media (max-width: 620px) {
+      .dialContainer {
+        transform: translate(-50%, -50%) scale(0.87);
+      }
+    }
   }
 </style>
 </head>
