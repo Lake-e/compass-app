@@ -253,6 +253,9 @@
       }
       dial.style.transform = "rotate(" + heading + "deg)"
       var acHeading = 360 - heading;
+      if(acHeading > 360){
+        acHeading -= 360;
+      }
       document.getElementById("heading-value").innerHTML = Math.round(acHeading) + "&deg";
       var directionName = "";
       if(acHeading > 337 || acHeading < 22){
