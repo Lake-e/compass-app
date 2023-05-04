@@ -21,8 +21,7 @@ const OFFLINE_URL = '/compass-app/index.html';
 var cacheAssets = [
     '/compass-app/resources/compass-app-icon.png',
     '/compass-app/compass-dial.jpeg',
-    '/compass-app/index.html',
-    "/compass-app"
+    '/compass-app/index.html'
 ]
 
 self.addEventListener('install', (event) => {
