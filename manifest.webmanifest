@@ -1,0 +1,24 @@
+{
+    "name": "Compass App",
+    "short_name": "Compass",
+    "icons": [
+      {
+        "src": "/compass-app/resources/compass-app-icon.png",
+        "sizes": "354x354",
+        "type": "image/png"
+      }
+    ],
+    "background_color": "black",
+    "categories": ["utilites", "productivity", "compass"],
+    "screenshots" : [
+        {
+            "src": "/compass-app/resources/app-screenshot-wide.jpeg",
+            "sizes": "1280x889",
+            "type": "image/jpeg",
+            "platform": "wide",
+            "label": "Compass app on an iPad with Stage Manager enabled."
+        }
+    ],
+    "display": "standalone",
+    "start_url": "/compass-app/"
+}
