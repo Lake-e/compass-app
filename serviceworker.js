@@ -30,23 +30,16 @@ self.addEventListener('activate', (event) => {
 // When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
 self.addEventListener('fetch', (event) => {
   console.log('Fetch intercepted for:', event.request.url);
+
   event.respondWith(
-    // Try to fetch the requested resource from the network first
     fetch(event.request).then((response) => {
-      // If the response is successful, clone it and put it in the cache for future use
-      if (response.status === 200) {
-        // Create a new response object with the same headers and status code as the original
-        const clonedResponse = new Response(response.body, {headers: response.headers, status: response.status, statusText: response.statusText});
-        // Put the cloned response in the cache
-        caches.open(cacheName).then((cache) => {
-          cache.put(event.request, clonedResponse);
-        });
-      }
-      // Return the original response to the browser
-      return response;
+      const clonedResponse = response.clone(); // clone the response
+      caches.open(cacheName).then((cache) => {
+        cache.put(event.request, clonedResponse); // save the cloned response to the cache
+      });
+      return response; // return the original response
     }).catch(() => {
-      // If the network request fails, try to respond with a precached resource
-      return caches.match(event.request);
-    }),
+      return caches.match(event.request); // fallback to cache if network fails
+    })
   );
 });
