@@ -13,7 +13,7 @@ Copyright 2021 Google LLC
  */
 
 // Choose a cache name
-const cacheName = 'cache-v1';
+const cacheName = 'cache-v1.1';
 // List the files to precache
 const precacheResources = ['/compass-app/', '/compass-app/index.html', '/compass-app/privacy.html', '/compass-app/compass-dial.jpeg', '/compass-app/resources/compass-app-icon.png'];
 
