@@ -13,7 +13,7 @@ Copyright 2021 Google LLC
  */
 
 // Choose a cache name
-const cacheName = 'cache-v1.2';
+const cacheName = 'cache-v1.3';
 // List the files to precache
 const precacheResources = ['/compass-app/', '/compass-app/index.html', '/compass-app/privacy.html', '/compass-app/compass-dial.jpeg', '/compass-app/resources/compass-app-icon.png'];
 
@@ -35,11 +35,14 @@ self.addEventListener('fetch', (event) => {
     fetch(event.request).then((response) => {
       // If the response is successful, clone it and put it in the cache for future use
       if (response.status === 200) {
+        // Create a new response object with the same headers and status code as the original
+        const clonedResponse = new Response(response.body, {headers: response.headers, status: response.status, statusText: response.statusText});
+        // Put the cloned response in the cache
         caches.open(cacheName).then((cache) => {
-          cache.put(event.request, response.clone());
+          cache.put(event.request, clonedResponse);
         });
       }
-      // Return the response to the browser
+      // Return the original response to the browser
       return response;
     }).catch(() => {
       // If the network request fails, try to respond with a precached resource
