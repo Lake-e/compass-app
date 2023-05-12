@@ -8,11 +8,15 @@
 <meta name="viewport" content="width=device-width, user-scalable=no">
 <meta name="apple-mobile-web-app-title" content="Compass">
 <link rel="apple-touch-icon" href="/compass-app/resources/compass-app-icon.png">
+<!-- Google font alternative for Apple system font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   body {
     background: black;
     color: white;
-    font-family: -apple-system;
+    font-family: -apple-system, Inter, sans-serif;
     font-weight: 200;
     overflow: hidden;
     /*position: fixed;*/
@@ -74,6 +78,7 @@
     position: absolute;
     left: -30%; top: -30%;
     -webkit-backdrop-filter: blur(4px) brightness(2);
+    backdrop-filter: blur(4px) brightness(2);
     z-index: 300;
     text-align: center;
     display: grid;
@@ -125,7 +130,7 @@
 <body>
   <div class = "dialContainer">
     <div class = "accessblur" onclick="grantPremission()">Enable compass access</div>
-    <span style="position: absolute; transform: translateX(-50%); top: 32px; left: 50%; width: 5px; height: 18px; -webkit-backdrop-filter: invert(1); z-index: 1;"  ></span>
+    <span style="position: absolute; transform: translateX(-50%); top: 32px; left: 50%; width: 5px; height: 18px; -webkit-backdrop-filter: invert(1); backdrop-filter: invert(1); z-index: 1;"  ></span>
     <span style="position: absolute; transform: translateX(-50%); top: -16px; left: 50%; width: 5px; height: 48px; background: white; z-index: 1;"  ></span>
     <div id = "dial">
       <span class="label cardinal" style="left: 50%; top: 25%;">N</span>
