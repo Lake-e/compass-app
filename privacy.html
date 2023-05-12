@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compass App Privacy</title>
+<!--<link rel="manifest" href="/compass-app/manifest.webmanifest">--> <!-- We want this page to open with browser UI, so no webmanifest-->
+<meta name="full-screen" content="yes"/>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link rel="apple-touch-icon" href="/compass-app/resources/compass-app-icon.png">
+<!-- Google font alternative for Apple system font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  html {
+    background: black;
+  }
+  body {
+    background: black;
+    color: white;
+    font-family: -apple-system, Inter, sans-serif;
+    font-weight: 200;
+    overflow: hidden;
+    /*position: fixed;*/
+    height: 100%;
+  }
+  p {
+    max-width: 640px;
+    margin: auto;
+    line-height: 1.7em;
+    font-size: 1.12em;
+    padding: 5px;
+    font-weight: 200;
+  }
+  a {
+    color: currentColor;
+  }
+</style>
+</head>
+<body>
+  <div style = "text-align: center;">
+    <img src = "http://lake-e.github.io/compass-app/resources/compass-app-icon.png" style = "width: 80px; margin: 12px; border-radius: 14px;">
+    <h1 style = "font-weight: 400; font-size: 1.5em; margin-top: 0;">
+      Compass App Privacy
+    </h1>
+  </div>
+
+  <p>
+    Here's how we handle user data:
+  </p>
+
+  <p>
+    Location data: We only send approximate location data (to about the nearest mile) to Texas A&M GeoServices for determining nearby city names. According to Texas A&M, they do not store or track user data. You can read more about their privacy policy <a href = "https://geoservices.tamu.edu/About/Legal/" target="_blank">here</a>. Precise location data says on your device.
+  </p>
+  <p>
+    Cookies: The app may use cookies for functional purposes. Google Analytics is use to gauge how many users are using our app, and may also use cookies. We do not collect any personally identifiable information, but we have no control over how Google uses cookies. For more information, please see <a href = "https://policies.google.com/technologies/partner-sites" target="_blank">Google's privacy policy</a>.
+  </p>
+  <p>
+    The app does not track your activities to target advertizements or use your data for any other purpose.
+  </p>
+  <p>
+    Thank you for using my compass web app!
+  </p>
+  
+</body>
+</html>
