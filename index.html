@@ -88,6 +88,28 @@
     place-content: center;
     transition: opacity 1s ease-in-out;
   }
+  .installPrompt {
+    display: none;
+    position: fixed;
+    top: 22px; right: 22px;
+    max-width: 70%;
+    min-width: 240px;
+    background: rgba(80,80,80,0.4);
+    -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 20px;
+    transition: opacity 0.2s ease-in-out;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @media (display-mode: browser) {
+    .installPrompt {
+      display: block
+    }
+  }
 
   @media (max-width: 345px), (max-height: 345px) {
     .dialContainer {
@@ -131,6 +153,18 @@
 </style>
 </head>
 <body>
+  <div class = "installPrompt" id = "installPrompt">
+    <h4 style = "margin: 0; text-transform: uppercase;">Easliy install this app</h4>
+    <div id = "installInstructions">
+      Tap 
+      <svg style = "position: relative; top: 3px;" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_489_191475)"><path d="M8 9H7c-.943 0-1.414 0-1.707.293C5 9.586 5 10.057 5 11v8c0 .943 0 1.414.293 1.707C5.586 21 6.057 21 7 21h10c.943 0 1.414 0 1.707-.293C19 20.414 19 19.943 19 19v-8c0-.943 0-1.414-.293-1.707C18.414 9 17.943 9 17 9h-1m-4 5V3m0 0l2.5 2.5M12 3L9.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g><defs><clipPath id="clip0_489_191475"><path fill="currentColor" d="M0 0H24V24H0z"></path></clipPath></defs></svg>
+      and tap <b>Add to Home Screen</b>
+    </div>
+    <div id = "installBtn" style = "display: none">
+      <button style = "pointer-events: auto;" onclick="showInAppInstallPromotion();">Install</button>
+    </div>
+    <svg onclick = "document.getElementById('installPrompt').style.opacity='0';" style = "position: absolute; top: 12px; right: 12px; pointer-events: auto;" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_489_191309)" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 9l6 6m0-6l-6 6" stroke-linejoin="round"></path></g><defs><clipPath id="clip0_489_191309"><path fill="currentColor" d="M0 0H24V24H0z"></path></clipPath></defs></svg>
+  </div>
   <div class = "accessblur" id = "accessblur">
     <div id = "accessbutton" style = "position: relative; color: black; background: rgba(255,255,255,0.8); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); padding: 30px 44px; border-radius: 10px; box-shadow: 2px 2px 44px black;">
       <img src = "https://lake-e.github.io/compass-app/resources/compass-app-icon.png" style = "width: 80px; margin: 12px; border-radius: 14px;">
@@ -211,6 +245,11 @@
   var lastNamedLong = 0;
   
   var popupShown = true;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    document.getElementById("installInstructions").style.display = "none";
+    document.getElementById("installBtn").style.display = "block";
+  });
   
   function showPosition(position) {
     var nameLat = position.coords.latitude.toFixed(2);
