@@ -104,6 +104,15 @@
     user-select: none;
     pointer-events: none;
   }
+  .installPrompt button {
+    padding: 8px 24px;
+    margin-top: 12px;
+    font-size: 0.9em;
+    background: rgba(255,255,255,0.9);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); 
+    border-radius: 200000px;
+    border: none;
+  }
 
   @media (display-mode: browser) {
     .installPrompt {
@@ -248,6 +257,9 @@
 
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
+    document.getElementById("installInstructions").style.display = "none";
+    document.getElementById("installBtn").style.display = "block";
+    
     // Prevents the default mini-infobar or install dialog from appearing on mobile
     e.preventDefault();
     // Save the event because you'll need to trigger it later.
