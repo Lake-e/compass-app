@@ -266,9 +266,6 @@
 
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
-    document.getElementById("installInstructions").style.display = "none";
-    document.getElementById("installBtn").style.display = "block";
-    
     // Prevents the default mini-infobar or install dialog from appearing on mobile
     e.preventDefault();
     // Save the event because you'll need to trigger it later.
@@ -278,6 +275,9 @@
     // can have buttons in different locations, or wait to prompt
     // as part of a critical journey.
     showInAppInstallPromotion();
+    
+    document.getElementById("installInstructions").style.display = "none";
+    document.getElementById("installBtn").style.display = "block";
   });
   
   function showPosition(position) {
