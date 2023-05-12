@@ -15,7 +15,7 @@ Copyright 2021 Google LLC
 // Choose a cache name
 const cacheName = 'cache-v1';
 // List the files to precache
-const precacheResources = ['/', '/index.html', '/compass-app/compass-dial.jpeg'];
+const precacheResources = ['/compass-app/', '/compass-app/index.html', '/compass-app/compass-dial.jpeg'];
 
 // When the service worker is installing, open the cache and add the precache resources to it
 self.addEventListener('install', (event) => {
