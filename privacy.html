@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Compass App Privacy</title>
-<!--<link rel="manifest" href="/compass-app/manifest.webmanifest">--> <!-- We want this page to open with browser UI, so no webmanifest-->
+<link rel="manifest" href="/compass-app/manifest.webmanifest">
 <meta name="full-screen" content="yes"/>
 <meta name="viewport" content="width=device-width, user-scalable=no">
 <link rel="apple-touch-icon" href="/compass-app/resources/compass-app-icon.png">
@@ -34,10 +34,21 @@
   a {
     color: currentColor;
   }
+  .closebtn {
+    color: currentColor;
+    position: absolute;
+    top: 24px; right: 24px;
+  }
+
 </style>
 </head>
 <body>
-  <div style = "text-align: center;">
+  
+  <a href = "/compass-app">
+  <svg class = "closebtn" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_489_191309)" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 9l6 6m0-6l-6 6" stroke-linejoin="round"></path></g><defs><clipPath id="clip0_489_191309"><path fill="currentColor" d="M0 0H24V24H0z"></path></clipPath></defs></svg>
+  </a>
+
+  <div style = "text-align: center; -webkit-user-select: none; user-select: none; pointer-events: none;">
     <img src = "http://lake-e.github.io/compass-app/resources/compass-app-icon.png" style = "width: 80px; margin: 12px; border-radius: 14px;">
     <h1 style = "font-weight: 400; font-size: 1.5em; margin-top: 0;">
       Compass App Privacy
